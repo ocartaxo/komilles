@@ -6,7 +6,7 @@ O objetivo final é fornecer informações sobre destinos de viagem, tais como f
 
 | :placard: Vitrine.Dev |     |
 | -------------  | --- |
-| :sparkles: Nome        | **Adopet-API**
+| :sparkles: Nome        | **KoMilles API**
 | :label: Tecnologias | Kotlin, Spring Boot, Spring JPA, PostgresSQL, Flyway, Lombok
 
 ## Detalhes do projeto
