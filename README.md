@@ -1,24 +1,9 @@
-# KoMilles
+### Semana 1
 
-O objetivo final é fornecer informações sobre destinos de viagem, tais como foto do local e comentários de pessoas que o visitaram.
-![Banner](https://github.com/ocartaxo/kopet/assets/23222759/eb32993a-3d2c-49fb-b5b4-d8ba3f5e14c7#vitrinedev)
-
-
-| :placard: Vitrine.Dev |     |
-| -------------  | --- |
-| :sparkles: Nome        | **Adopet-API**
-| :label: Tecnologias | Kotlin, Spring Boot, Spring JPA, PostgresSQL, Flyway, Lombok
-
-## Detalhes do projeto
-
-Esse projeto viza disponiblizar uma [API](https://pt.wikipedia.org/wiki/Interface_de_programa%C3%A7%C3%A3o_de_aplica%C3%A7%C3%B5es)
-que será consumida pelo front-end fornecido na descrição do desafio. No entanto, diferentes projetos front-end podem fazer
-uso da API disponibilziada por esse projeto, desde que respeite os protocolos de comunicações estabelecidos pelo mesmo.
+Na primeira semana criei a entidade Tutor uma camada HTTP para manipular as informações relacionadas a essa tabela
+assim como as regras de negócios para atualizar as informações relacionada a essa entidade.
 
 
-O desafio foi pensado para ser desenvolvido ao longo de 4 semanas. A cada semana novas funcionalidades eram propostas
-através do Trello. O histórico de desenvolvimento das funcionalidades ao longo de cada semana pode ser encontrado em
+As colunas dessa tabela foram criadas após analisar a [UI](https://www.figma.com/proto/1qD4hmpnvxoeHRC1cbWKgR/Angular_-Componentizac%CC%A7a%CC%83o-e-Design-com-Angular-Material-_-Jornada-Milhas?type=design&node-id=4-6408&scaling=min-zoom&page-id=0%3A1](https://www.figma.com/proto/1qD4hmpnvxoeHRC1cbWKgR/Angular_-Componentizac%CC%A7a%CC%83o-e-Design-com-Angular-Material-_-Jornada-Milhas?type=design&node-id=4-6408&scaling=min-zoom&page-id=0%3A1) da aplicação.
 
-- [Semana 1](https://github.com/ocartaxo/komilles/commits/week1)
-- [Semana 2](https://github.com/ocartaxo/komilles/commits/week2)
-- [Semana 3 & 4](https://github.com/ocartaxo/komilles/commits/week3)
+Clique [aqui](https://trello.com/b/OnuqDQ3A/alurachallengebackend7-semana-1) para vizualizar o board no Trello dessa semana.
