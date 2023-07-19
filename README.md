@@ -1,7 +1,7 @@
 # KoMilles
 
 O objetivo final é fornecer informações sobre destinos de viagem, tais como foto do local e comentários de pessoas que o visitaram.
-![Banner](https://github.com/ocartaxo/komilles/assets/23222759/9231382f-f1dd-4046-8c75-3d72264af76f#vitrinedev)
+![Banner](https://github.com/ocartaxo/komilles/assets/23222759/acf95dd4-ee4a-45bd-81f2-ee1bebaa2cca#vitrinedev)
 
 
 
@@ -20,6 +20,6 @@ uso da API disponibilziada por esse projeto, desde que respeite os protocolos de
 O desafio foi pensado para ser desenvolvido ao longo de 4 semanas. A cada semana novas funcionalidades eram propostas
 através do Trello. O histórico de desenvolvimento das funcionalidades ao longo de cada semana pode ser encontrado em
 
-- [Semana 1](https://github.com/ocartaxo/komilles/commits/week1)
-- [Semana 2](https://github.com/ocartaxo/komilles/commits/week2)
-- [Semana 3 & 4](https://github.com/ocartaxo/komilles/commits/week3)
+- *[Semana 1]*(https://github.com/ocartaxo/komilles/commits/week1)
+- *Semana 2* (loading...)
+- *Semana 3 & 4* (loading...)
