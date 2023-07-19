@@ -20,6 +20,6 @@ uso da API disponibilziada por esse projeto, desde que respeite os protocolos de
 O desafio foi pensado para ser desenvolvido ao longo de 4 semanas. A cada semana novas funcionalidades eram propostas
 através do Trello. O histórico de desenvolvimento das funcionalidades ao longo de cada semana pode ser encontrado em
 
-- *[Semana 1]*(https://github.com/ocartaxo/komilles/commits/week1)
+- [*Semana 1*](https://github.com/ocartaxo/komilles/commits/week1)
 - *Semana 2* (loading...)
 - *Semana 3 & 4* (loading...)
