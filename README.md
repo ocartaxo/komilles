@@ -1,7 +1,8 @@
 # KoMilles
 
 O objetivo final é fornecer informações sobre destinos de viagem, tais como foto do local e comentários de pessoas que o visitaram.
-![Banner]()
+![Banner](https://github.com/ocartaxo/komilles/assets/23222759/9231382f-f1dd-4046-8c75-3d72264af76f#vitrinedev)
+
 
 
 | :placard: Vitrine.Dev |     |
