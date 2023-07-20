@@ -4,17 +4,19 @@ import br.com.ocartaxo.komilles.domain.statement.StatementRequest
 import br.com.ocartaxo.komilles.domain.statement.StatementResponse
 import br.com.ocartaxo.komilles.domain.statement.StatementUpdateRequest
 import br.com.ocartaxo.komilles.domain.statement.StatementsService
-import br.com.ocartaxo.komilles.statement.*
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/api/depoimentos")
-class StatementsController(private val service: StatementsService
+class StatementsController(
+    private val service: StatementsService
 ) {
 
     @PostMapping
@@ -29,7 +31,7 @@ class StatementsController(private val service: StatementsService
     }
 
     @GetMapping
-    fun list(@PageableDefault(size=10) pageable: Pageable) = ResponseEntity.ok(service.showAll(pageable))
+    fun list(@PageableDefault(size = 10) pageable: Pageable) = ResponseEntity.ok(service.showAll(pageable))
 
     @GetMapping("/{id}")
     fun show(@PathVariable id: Int): ResponseEntity<StatementResponse> = ResponseEntity.ok(service.show(id))
@@ -38,5 +40,5 @@ class StatementsController(private val service: StatementsService
     fun update(@RequestBody request: StatementUpdateRequest) = ResponseEntity.ok(service.update(request))
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Int) = ResponseEntity.status(204).body(service.deleteBy(id))
+    fun delete(@PathVariable id: Int) = ResponseEntity.status(HttpStatus.NO_CONTENT).body(service.deleteBy(id))
 }
