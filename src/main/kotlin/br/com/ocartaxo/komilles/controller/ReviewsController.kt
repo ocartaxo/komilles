@@ -1,29 +1,28 @@
 package br.com.ocartaxo.komilles.controller
 
-import br.com.ocartaxo.komilles.domain.statement.StatementRequest
-import br.com.ocartaxo.komilles.domain.statement.StatementResponse
-import br.com.ocartaxo.komilles.domain.statement.StatementUpdateRequest
-import br.com.ocartaxo.komilles.domain.statement.StatementsService
+import br.com.ocartaxo.komilles.domain.review.ReviewRequest
+import br.com.ocartaxo.komilles.domain.review.ReviewResponse
+import br.com.ocartaxo.komilles.domain.review.ReviewUpdateRequest
+import br.com.ocartaxo.komilles.domain.review.ReviewsService
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/api/depoimentos")
-class StatementsController(
-    private val service: StatementsService
+class ReviewsController(
+    private val service: ReviewsService
 ) {
 
     @PostMapping
     fun create(
-        @RequestBody @Valid request: StatementRequest,
+        @RequestBody @Valid request: ReviewRequest,
         builder: UriComponentsBuilder
-    ): ResponseEntity<StatementResponse> {
+    ): ResponseEntity<ReviewResponse> {
         val statement = service.create(request)
         val uri = builder.buildAndExpand("/api/depoimentos-home/${statement.id}").toUri()
 
@@ -34,10 +33,10 @@ class StatementsController(
     fun list(@PageableDefault(size = 10) pageable: Pageable) = ResponseEntity.ok(service.showAll(pageable))
 
     @GetMapping("/{id}")
-    fun show(@PathVariable id: Int): ResponseEntity<StatementResponse> = ResponseEntity.ok(service.show(id))
+    fun show(@PathVariable id: Int): ResponseEntity<ReviewResponse> = ResponseEntity.ok(service.show(id))
 
     @RequestMapping(method = [RequestMethod.PUT, RequestMethod.PATCH])
-    fun update(@RequestBody request: StatementUpdateRequest) = ResponseEntity.ok(service.update(request))
+    fun update(@RequestBody request: ReviewUpdateRequest) = ResponseEntity.ok(service.update(request))
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Int) = ResponseEntity.status(HttpStatus.NO_CONTENT).body(service.deleteBy(id))

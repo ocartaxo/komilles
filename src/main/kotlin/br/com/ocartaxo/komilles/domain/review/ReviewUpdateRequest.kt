@@ -1,10 +1,10 @@
-package br.com.ocartaxo.komilles.domain.statement
+package br.com.ocartaxo.komilles.domain.review
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class StatementUpdateRequest(
+data class ReviewUpdateRequest(
     val id: Int,
-    @JsonProperty("comentário")
+    @JsonProperty("analise")
     val comment: String? = null,
     @JsonProperty("foto")
     val photo: String? = null

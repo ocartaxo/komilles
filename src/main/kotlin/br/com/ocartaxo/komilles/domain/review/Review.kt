@@ -1,10 +1,10 @@
-package br.com.ocartaxo.komilles.domain.statement
+package br.com.ocartaxo.komilles.domain.review
 
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "depoimentos")
-data class Statement(
+@Table(name = "analises")
+data class Review(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,
     @Column(name="usuario")

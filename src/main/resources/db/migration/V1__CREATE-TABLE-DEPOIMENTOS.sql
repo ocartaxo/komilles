@@ -1,4 +1,4 @@
-CREATE TABLE depoimentos
+CREATE TABLE analises
 (
     id         SERIAL PRIMARY KEY NOT NULL,
     usuario    VARCHAR(255)       NOT NULL,

@@ -1,17 +1,13 @@
 package br.com.ocartaxo.komilles.controller
 
-import br.com.ocartaxo.komilles.domain.statement.StatementRequest
-import br.com.ocartaxo.komilles.domain.statement.StatementUpdateRequest
-import br.com.ocartaxo.komilles.domain.statement.StatementsService
+import br.com.ocartaxo.komilles.domain.review.ReviewRequest
+import br.com.ocartaxo.komilles.domain.review.ReviewUpdateRequest
+import br.com.ocartaxo.komilles.domain.review.ReviewsService
 import com.nimbusds.jose.shaded.gson.Gson
-import io.mockk.junit5.MockKExtension
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.*
 import org.springframework.security.test.context.support.WithMockUser
@@ -23,11 +19,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension::class)
-@WebMvcTest(controllers = [StatementsController::class])
-class StatementsControllerTest(@Autowired private val mockMvc: MockMvc) {
+@WebMvcTest(controllers = [ReviewsController::class])
+class ReviewsControllerTest(@Autowired private val mockMvc: MockMvc) {
 
     @MockBean
-    private lateinit var mockService: StatementsService
+    private lateinit var mockService: ReviewsService
 
     @Test
     @WithMockUser
@@ -46,12 +42,12 @@ class StatementsControllerTest(@Autowired private val mockMvc: MockMvc) {
     }
 
     companion object {
-        private val request = StatementRequest(
+        private val request = ReviewRequest(
             username = "João Neto",
             photo = "http://umaimagemqualquer.com.br",
             comment = "Gostei muito do local, tem um ar leve e paisagem muito belas. Recomendo que visitem!"
         )
-        private val updateRequest = StatementUpdateRequest(
+        private val updateRequest = ReviewUpdateRequest(
             id = 1,
             comment = "O local é bacana mas fiquei chateado por que o parque que eu fui estava fechado!"
         )
