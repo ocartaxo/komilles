@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class StatementUpdateRequest(
     val id: Int,
     @JsonProperty("comentário")
-    val comment: String?,
+    val comment: String? = null,
     @JsonProperty("foto")
-    val photo: String?
+    val photo: String? = null
 )
