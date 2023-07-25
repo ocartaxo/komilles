@@ -4,10 +4,15 @@ import br.com.ocartaxo.komilles.domain.review.ReviewRequest
 import br.com.ocartaxo.komilles.domain.review.ReviewUpdateRequest
 import br.com.ocartaxo.komilles.domain.review.ReviewsService
 import com.nimbusds.jose.shaded.gson.Gson
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.json.JacksonTester
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.*
 import org.springframework.security.test.context.support.WithMockUser
@@ -22,12 +27,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 @WebMvcTest(controllers = [ReviewsController::class])
 class ReviewsControllerTest(@Autowired private val mockMvc: MockMvc) {
 
+
     @MockBean
     private lateinit var mockService: ReviewsService
 
     @Test
     @WithMockUser
-    fun `test if http status code is 201 when create an statement`() {
+    @DisplayName("test if http status code is 201 when create an review")
+    fun testePost() {
 
         val body = Gson().toJson(request)
 

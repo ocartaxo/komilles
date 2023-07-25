@@ -12,5 +12,5 @@ data class Review(
     @Column(name = "foto")
     var photo: String,
     @Column(name="depoimento")
-    var statement: String
+    var review: String
 )

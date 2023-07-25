@@ -30,18 +30,18 @@ class ReviewsService(private val repository: ReviewsRepository) {
 }
 
 private fun Review.update(request: ReviewUpdateRequest) {
-    this.statement = request.comment ?: this.statement
+    this.review = request.comment ?: this.review
     this.photo = request.photo ?: this.photo
 }
 private fun ReviewRequest.toEntity()  = Review(
     username = this.username,
     photo = this.photo,
-    statement = this.comment
+    review = this.comment
 )
 
 private fun Review.toDTO() = ReviewResponse(
     id = this.id!!,
     username = this.username,
     photo = this.photo,
-    comment = this.statement
+    review = this.review
 )
