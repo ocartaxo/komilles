@@ -2,7 +2,12 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/komilles-test
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   flyway:
     url: jdbc:postgresql://localhost:5432/komilles-test
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
