@@ -19,7 +19,19 @@ class SecurityConfigs {
 
         return http.authorizeHttpRequests { request ->
             request.anyRequest().permitAll()
-        }.csrf { csrf -> csrf.disable() }.build()
+        }.build()
+
+    }
+
+    @Bean
+    fun corsMapping(): CorsConfigurationSource {
+
+        val configuration = CorsConfiguration()
+        configuration.allowedOrigins = listOf("*")
+        configuration.allowedMethods = listOf("GET", "POST", "PUT", "PATCH", "DELETE")
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration)
+        return source
 
     }
 
