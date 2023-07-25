@@ -22,4 +22,13 @@ class ErrorHandler {
         })
     }
 
+    @ExceptionHandler(DestinationException::class)
+    fun handleDestinationError(ex: DestinationException): ResponseEntity<Any> {
+        return ResponseEntity.badRequest().body(object {
+            val mensagem = ex.msg
+        })
+    }
+
+
+
 }
