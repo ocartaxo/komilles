@@ -1,0 +1,6 @@
+CREATE TABLE destinos(
+    id SERIAL PRIMARY KEY NOT NULL,
+    nome VARCHAR(255),
+    foto VARCHAR(500),
+    preco DOUBLE PRECISION
+);
