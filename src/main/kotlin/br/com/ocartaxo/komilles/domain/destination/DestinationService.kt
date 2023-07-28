@@ -1,36 +1,40 @@
 package br.com.ocartaxo.komilles.domain.destination
 
-import br.com.ocartaxo.komilles.infra.error.DestinationException
+import br.com.ocartaxo.komilles.infra.exception.DestinationNotFoundException
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
-class DestinationService(private val repository: DestinationRepository) {
+class DestinationService(
+    private val repository: DestinationRepository,
+    private val mapper: DestinationMapper
+) {
 
 
     fun create(body: DestinationCreateRequest): DestinationResponse {
 
-        val entity = body.toEntity()
+        val entity = mapper.toEntity(body)
 
         repository.save(entity)
 
-        return entity.toDTO()
+        return mapper.toDTO(entity)
     }
 
-    fun get(id: Int) = repository.findById(id)
-        .orElseThrow { DestinationException("Nenhum destino de $id foi encontrado!") }
-        .toDTO()
+    fun getById(id: Int): DestinationResponse = repository.findById(id)
+        .orElseThrow { DestinationNotFoundException("${id}(id)") }
+        .run { mapper.toDTO(this) }
+
 
     fun getByName(destinationName: String) = repository.findDestinationByName(destinationName)
-        .orElseThrow{ DestinationException("Nenhum destino foi encontrado") }
+        .orElseThrow{ DestinationNotFoundException(destinationName) }
 
-    fun getAll(pageable: Pageable) = repository.findAll(pageable).map(Destination::toDTO)
+    fun getAll(pageable: Pageable) = repository.findAll(pageable).map(mapper::toDTO)
     fun update(body: DestinationUpdateRequest): DestinationResponse {
-        val destination = repository.findById(body.id).orElseThrow { DestinationException("Nenhum destino encontrado!") }
+        val dest = repository.findById(body.id).orElseThrow { DestinationNotFoundException(body.id.toString()) }
 
-        destination.update(body)
+        dest.update(body)
 
-        return destination.toDTO()
+        return mapper.toDTO(dest)
     }
 
     fun deleteById(id: Int) {
@@ -38,21 +42,3 @@ class DestinationService(private val repository: DestinationRepository) {
     }
 
 }
-
-fun Destination.update(body: DestinationUpdateRequest) {
-    this.photo = body.photo
-    this.price = body.price
-}
-
-private fun Destination.toDTO() = DestinationResponse(
-    id = this.id!!,
-    name = this.name,
-    photo = this.photo,
-    price = this.price
-)
-
-private fun DestinationCreateRequest.toEntity() = Destination(
-    name = this.name,
-    photo = this.photo,
-    price = this.price
-)
