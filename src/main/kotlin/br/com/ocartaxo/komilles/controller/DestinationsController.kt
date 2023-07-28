@@ -22,7 +22,7 @@ class DestinationsController(private val service: DestinationService) {
     }
 
     @GetMapping("/{id}")
-    fun show(@PathVariable id: Int) = ResponseEntity.ok(service.get(id))
+    fun show(@PathVariable id: Int) = ResponseEntity.ok(service.getById(id))
 
     @GetMapping
     fun showByName(@RequestParam(name = "name") name: String) = ResponseEntity.ok(service.getByName(name))
