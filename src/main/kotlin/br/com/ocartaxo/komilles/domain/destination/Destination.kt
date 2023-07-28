@@ -13,4 +13,9 @@ data class Destination(
     var photo: String,
     @Column(name="preco")
     var price: Double
-)
+) {
+    fun update(body: DestinationUpdateRequest){
+        this.photo = body.photo
+        this.price = body.price
+    }
+}
