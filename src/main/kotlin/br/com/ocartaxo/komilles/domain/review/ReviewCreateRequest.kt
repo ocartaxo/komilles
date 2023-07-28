@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.nimbusds.jose.shaded.gson.annotations.SerializedName
 import jakarta.validation.constraints.NotBlank
 
-data class ReviewRequest(
+data class ReviewCreateRequest(
     @NotBlank
     @JsonProperty("usuario")
     @SerializedName("usuario")

@@ -1,6 +1,6 @@
 package br.com.ocartaxo.komilles.controller
 
-import br.com.ocartaxo.komilles.domain.review.ReviewRequest
+import br.com.ocartaxo.komilles.domain.review.ReviewCreateRequest
 import br.com.ocartaxo.komilles.domain.review.ReviewResponse
 import br.com.ocartaxo.komilles.domain.review.ReviewUpdateRequest
 import br.com.ocartaxo.komilles.domain.review.ReviewsService
@@ -20,13 +20,13 @@ class ReviewsController(
 
     @PostMapping
     fun create(
-        @RequestBody @Valid request: ReviewRequest,
+        @RequestBody @Valid request: ReviewCreateRequest,
         builder: UriComponentsBuilder
     ): ResponseEntity<ReviewResponse> {
-        val statement = service.create(request)
-        val uri = builder.buildAndExpand("/api/depoimentos-home/${statement.id}").toUri()
+        val review = service.create(request)
+        val uri = builder.buildAndExpand("/api/depoimentos-home/${review.id}").toUri()
 
-        return ResponseEntity.created(uri).body(statement)
+        return ResponseEntity.created(uri).body(review)
     }
 
     @GetMapping
