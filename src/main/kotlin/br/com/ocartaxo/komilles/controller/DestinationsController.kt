@@ -27,7 +27,7 @@ class DestinationsController(private val service: DestinationService) {
     @GetMapping
     fun showByName(@RequestParam(name = "name") name: String) = ResponseEntity.ok(service.getByName(name))
 
-    @GetMapping
+    @GetMapping("/list")
     fun showAll(@PageableDefault(size=10) pageable: Pageable) = ResponseEntity.ok(service.getAll(pageable))
 
     @RequestMapping(method = [RequestMethod.PUT, RequestMethod.PATCH])
