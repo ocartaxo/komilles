@@ -1,6 +1,6 @@
 package br.com.ocartaxo.komilles.controller
 
-import br.com.ocartaxo.komilles.domain.review.ReviewRequest
+import br.com.ocartaxo.komilles.domain.review.ReviewCreateRequest
 import br.com.ocartaxo.komilles.domain.review.ReviewUpdateRequest
 import br.com.ocartaxo.komilles.domain.review.ReviewsService
 import com.nimbusds.jose.shaded.gson.Gson
@@ -8,11 +8,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.json.JacksonTester
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.*
 import org.springframework.security.test.context.support.WithMockUser
@@ -49,7 +45,7 @@ class ReviewsControllerTest(@Autowired private val mockMvc: MockMvc) {
     }
 
     companion object {
-        private val request = ReviewRequest(
+        private val request = ReviewCreateRequest(
             username = "João Neto",
             photo = "http://umaimagemqualquer.com.br",
             comment = "Gostei muito do local, tem um ar leve e paisagem muito belas. Recomendo que visitem!"
