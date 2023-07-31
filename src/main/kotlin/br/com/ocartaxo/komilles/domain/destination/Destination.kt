@@ -9,13 +9,22 @@ data class Destination(
     val id: Int? = null,
     @Column(name="nome")
     val name: String,
-    @Column(name="foto")
-    var photo: String,
     @Column(name="preco")
-    var price: Double
+    var price: Double = 0.0,
+    @Column(name="foto1")
+    var thumbnailPhoto: String,
+    @Column(name="foto2")
+    var optionalPhoto: String? = null,
+    @Column(name="descricao")
+    var description: String? = null,
+    @Column(name="_meta")
+    var meta: String? = null
 ) {
     fun update(body: DestinationUpdateRequest){
-        this.photo = body.photo
+        this.thumbnailPhoto = body.thumbnailPhoto
+        this.optionalPhoto = body.photo
         this.price = body.price
+        this.description = body.description
+        this.meta = body.meta
     }
 }

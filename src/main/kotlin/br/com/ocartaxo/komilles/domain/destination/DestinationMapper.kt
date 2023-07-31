@@ -5,17 +5,20 @@ import org.springframework.stereotype.Component
 @Component
 object DestinationMapper {
     
-    fun toDTO(d: Destination) = DestinationResponse(
-        id = d.id!!,
-        name = d.name,
-        photo = d.photo,
-        price = d.price
+    fun toDTO(destination: Destination) = DestinationResponse(
+        id = destination.id!!,
+        name = destination.name,
+        photo = destination.thumbnailPhoto,
+        price = destination.price
     )
 
-    fun toEntity(d: DestinationCreateRequest) = Destination(
-        name = d.name,
-        photo = d.photo,
-        price = d.price
+    fun toEntity(destination: DestinationCreateRequest) = Destination(
+        name = destination.name,
+        thumbnailPhoto = destination.thumbnailPhoto,
+        optionalPhoto = destination.optionalPhoto,
+        price = destination.price,
+        description = destination.description,
+        meta = destination.meta
     )
 
 }

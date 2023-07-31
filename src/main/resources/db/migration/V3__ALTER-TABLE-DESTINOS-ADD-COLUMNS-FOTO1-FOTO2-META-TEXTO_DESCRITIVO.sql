@@ -1,2 +1,9 @@
-ALTER TABLE destinos DROP COLUMN foto;
+ALTER TABLE destinos
+    DROP COLUMN foto;
 
+ALTER TABLE destinos
+    ADD COLUMN foto1 VARCHAR(256),
+    ADD COLUMN foto2 VARCHAR(256),
+    ADD COLUMN meta VARCHAR(160),
+    ADD COLUMN descricao VARCHAR(512),
+    ADD COLUMN _meta VARCHAR(160);
