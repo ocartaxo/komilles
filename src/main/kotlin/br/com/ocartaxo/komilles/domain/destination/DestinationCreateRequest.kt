@@ -9,9 +9,10 @@ data class DestinationCreateRequest(
     val thumbnailPhoto: String,
     @JsonProperty("foto2")
     val optionalPhoto: String? = null,
+    @JsonProperty("preco")
     val price: Double,
     @JsonProperty("descricao")
-    val description: String? = null,
+    var description: String? = null,
 
     val meta: String? = null
 )
