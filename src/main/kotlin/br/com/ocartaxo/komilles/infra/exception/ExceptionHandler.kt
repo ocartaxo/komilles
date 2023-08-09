@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @RestControllerAdvice
 class ExceptionHandler {
@@ -17,7 +18,7 @@ class ExceptionHandler {
             val status = HttpStatus.INTERNAL_SERVER_ERROR
             val error = HttpStatus.INTERNAL_SERVER_ERROR.name
             val message = ex.localizedMessage
-            val timestamp = LocalDateTime.now()
+            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
             val path = request.servletPath
         })
     }
@@ -31,7 +32,7 @@ class ExceptionHandler {
             val status = HttpStatus.NOT_FOUND
             val error = HttpStatus.NOT_FOUND.name
             val message = ex.message
-            val timestamp = LocalDateTime.now()
+            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
             val path = request.servletPath
 
         })
@@ -46,7 +47,7 @@ class ExceptionHandler {
             val status = HttpStatus.BAD_REQUEST
             val error = HttpStatus.BAD_REQUEST.name
             val errorMessage = ex.bindingResult.fieldErrors.associate { e -> e.field to e.defaultMessage }.toString()
-            val timestamp = LocalDateTime.now()
+            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
             val path = request.servletPath
 
         })
