@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class KomillesApplication
+class KoMillesApplication
 
 fun main(args: Array<String>) {
-	runApplication<KomillesApplication>(*args)
+	runApplication<KoMillesApplication>(*args)
 }
