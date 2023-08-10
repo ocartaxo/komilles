@@ -18,3 +18,8 @@ spring:
     user: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     url: jdbc:postgresql://${DB_URI}:${DB_PORT}/komilles
+
+
+
+openai:
+  api_key: ${API_KEY}
