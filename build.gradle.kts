@@ -7,6 +7,7 @@ plugins {
 	id("org.flywaydb.flyway") version "9.21.1"
 	id("io.ktor.plugin") version "2.3.3"
 	kotlin("jvm") version "1.8.22"
+	kotlin("plugin.serialization") version "1.9.0"
 	kotlin("plugin.spring") version "1.8.22"
 	kotlin("plugin.jpa") version "1.8.22"
 }
@@ -42,6 +43,7 @@ dependencies {
 	implementation("com.aallam.openai:openai-client:3.3.0")
 	implementation("io.ktor:ktor-client-apache5:2.3.3")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")

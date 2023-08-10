@@ -1,6 +1,8 @@
 package br.com.ocartaxo.komilles.infra.exception
 
+import com.aallam.openai.api.exception.RateLimitException
 import jakarta.servlet.http.HttpServletRequest
+import kotlinx.serialization.Serializable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -14,13 +16,13 @@ class ExceptionHandler {
 
     @ExceptionHandler(Exception::class)
     fun handleRuntimeException(ex: Exception, request: HttpServletRequest): ResponseEntity<Any> {
-        return ResponseEntity.internalServerError().body(object {
-            val status = HttpStatus.INTERNAL_SERVER_ERROR
-            val error = HttpStatus.INTERNAL_SERVER_ERROR.name
-            val message = ex.localizedMessage
-            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
-            val path = request.servletPath
-        })
+        return ResponseEntity.badRequest().body(ErrorResponse(
+            path = request.servletPath,
+            status = HttpStatus.INTERNAL_SERVER_ERROR,
+            error = HttpStatus.INTERNAL_SERVER_ERROR.name,
+            message = ex.message
+
+        ))
     }
 
     @ExceptionHandler(DestinationNotFoundException::class)
@@ -28,14 +30,13 @@ class ExceptionHandler {
         ex: DestinationNotFoundException,
         request: HttpServletRequest
     ): ResponseEntity<Any> {
-        return ResponseEntity.badRequest().body(object {
-            val status = HttpStatus.NOT_FOUND
-            val error = HttpStatus.NOT_FOUND.name
-            val message = ex.message
-            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
-            val path = request.servletPath
+        return ResponseEntity.badRequest().body(ErrorResponse(
+            path = request.servletPath,
+            status = HttpStatus.NOT_FOUND,
+            error = HttpStatus.NOT_FOUND.name,
+            message = ex.message
 
-        })
+        ))
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
@@ -43,16 +44,30 @@ class ExceptionHandler {
         ex: MethodArgumentNotValidException,
         request: HttpServletRequest
     ): ResponseEntity<Any> {
-        return ResponseEntity.badRequest().body(object {
-            val status = HttpStatus.BAD_REQUEST
-            val error = HttpStatus.BAD_REQUEST.name
-            val errorMessage = ex.bindingResult.fieldErrors.associate { e -> e.field to e.defaultMessage }.toString()
-            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
-            val path = request.servletPath
+        return ResponseEntity.badRequest().body(ErrorResponse(
+            path = request.servletPath,
+            status = HttpStatus.BAD_REQUEST,
+            error = HttpStatus.BAD_REQUEST.name,
+            message = ex.bindingResult.fieldErrors.associate { e -> e.field to e.defaultMessage }.toString(),
 
-        })
+        ))
     }
 
+    @ExceptionHandler
+    fun handleOpenAIError(
+        ex: RateLimitException,
+        request: HttpServletRequest
+    ): ResponseEntity<Any> {
+        return ResponseEntity.ok().build()
+    }
 
+    @Serializable
+    private data class ErrorResponse(
+        val status: HttpStatus,
+        val message: String?,
+        val error: String,
+        val path: String,
+        val timestamp: String = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")),
+    )
 
 }
