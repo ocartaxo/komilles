@@ -36,7 +36,7 @@ private fun Review.update(request: ReviewUpdateRequest) {
 private fun ReviewRequest.toEntity()  = Review(
     username = this.username,
     photo = this.photo,
-    review = this.comment
+    review = this.review
 )
 
 private fun Review.toDTO() = ReviewResponse(
