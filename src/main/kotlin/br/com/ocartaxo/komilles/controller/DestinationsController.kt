@@ -13,7 +13,7 @@ class DestinationsController(private val service: DestinationService) {
 
     @PostMapping
     fun create(
-        @RequestBody body: DestinationCreateRequest,
+        @RequestBody body: DestinationRequest,
         builder: UriComponentsBuilder
     ): ResponseEntity<DestinationResponse> {
         val destination = service.create(body)
@@ -34,7 +34,7 @@ class DestinationsController(private val service: DestinationService) {
     fun update(@RequestBody body: DestinationUpdateRequest) = ResponseEntity.ok(service.update(body))
 
     @DeleteMapping("/{id}")
-    fun delete(id: Int): ResponseEntity<Any> {
+    fun delete(@PathVariable id: Int): ResponseEntity<Any> {
         service.deleteById(id)
         return ResponseEntity.noContent().build()
     }
