@@ -1,9 +1,6 @@
 package br.com.ocartaxo.komilles.controller
 
-import br.com.ocartaxo.komilles.domain.review.ReviewCreateRequest
-import br.com.ocartaxo.komilles.domain.review.ReviewResponse
-import br.com.ocartaxo.komilles.domain.review.ReviewUpdateRequest
-import br.com.ocartaxo.komilles.domain.review.ReviewsService
+import br.com.ocartaxo.komilles.domain.review.*
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -20,7 +17,7 @@ class ReviewsController(
 
     @PostMapping
     fun create(
-        @RequestBody @Valid request: ReviewCreateRequest,
+        @RequestBody @Valid request: ReviewRequest,
         builder: UriComponentsBuilder
     ): ResponseEntity<ReviewResponse> {
         val review = service.create(request)
