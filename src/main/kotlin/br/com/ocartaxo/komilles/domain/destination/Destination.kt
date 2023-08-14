@@ -15,7 +15,7 @@ data class Destination(
     var price: Double
 ) {
     fun update(body: DestinationUpdateRequest){
-        this.photo = body.photo
-        this.price = body.price
+        this.photo = body.photo ?: this.photo
+        this.price = body.price ?: this.price
     }
 }

@@ -12,7 +12,7 @@ object DestinationMapper {
         price = d.price
     )
 
-    fun toEntity(d: DestinationCreateRequest) = Destination(
+    fun toEntity(d: DestinationRequest) = Destination(
         name = d.name,
         photo = d.photo,
         price = d.price

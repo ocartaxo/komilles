@@ -11,7 +11,7 @@ class DestinationService(
 ) {
 
 
-    fun create(body: DestinationCreateRequest): DestinationResponse {
+    fun create(body: DestinationRequest): DestinationResponse {
 
         val entity = mapper.toEntity(body)
 
