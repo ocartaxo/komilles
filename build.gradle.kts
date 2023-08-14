@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.0"
 	id("org.graalvm.buildtools.native") version "0.9.23"
 	kotlin("jvm") version "1.8.22"
+	kotlin("plugin.serialization") version "1.9.0"
 	kotlin("plugin.spring") version "1.8.22"
 	kotlin("plugin.jpa") version "1.8.22"
 }
@@ -27,6 +28,7 @@ repositories {
 }
 
 dependencies {
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-authorization-server")
