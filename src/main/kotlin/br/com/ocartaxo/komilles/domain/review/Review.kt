@@ -13,4 +13,9 @@ data class Review(
     var photo: String,
     @Column(name="depoimento")
     var review: String
-)
+) {
+    fun update(new: ReviewUpdateRequest) {
+        this.review = new.review ?: this.review
+        this.photo = new.photo ?: this.photo
+    }
+}
