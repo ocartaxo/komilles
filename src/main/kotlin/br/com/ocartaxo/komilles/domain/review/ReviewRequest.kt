@@ -1,17 +1,17 @@
 package br.com.ocartaxo.komilles.domain.review
 
-import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.NotBlank
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ReviewRequest(
     @NotBlank
-    @JsonProperty("usuario")
+    @SerialName("usuario")
     val username: String,
     @NotBlank
-    @JsonProperty("depoimento")
+    @SerialName("depoimento")
     val review: String,
-    @JsonProperty("foto")
+    @SerialName("foto")
     val photo: String
 )

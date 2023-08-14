@@ -1,11 +1,13 @@
 package br.com.ocartaxo.komilles.domain.review
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ReviewUpdateRequest(
     val id: Int,
-    @JsonProperty("analise")
-    val comment: String? = null,
-    @JsonProperty("foto")
+    @SerialName("depoimento")
+    val review: String? = null,
+    @SerialName("foto")
     val photo: String? = null
 )
