@@ -1,61 +1,118 @@
 package br.com.ocartaxo.komilles.controller
 
-import br.com.ocartaxo.komilles.domain.review.ReviewCreateRequest
-import br.com.ocartaxo.komilles.domain.review.ReviewUpdateRequest
-import br.com.ocartaxo.komilles.domain.review.ReviewsService
-import com.nimbusds.jose.shaded.gson.Gson
-import org.junit.jupiter.api.DisplayName
+import br.com.ocartaxo.komilles.domain.review.ReviewTest
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import org.flywaydb.core.Flyway
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.http.*
-import org.springframework.security.test.context.support.WithMockUser
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.MediaType
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit.jupiter.SpringExtension
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
+import org.springframework.test.web.servlet.*
+import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import org.springframework.web.context.WebApplicationContext
 
 @ActiveProfiles("test")
-@ExtendWith(SpringExtension::class)
-@WebMvcTest(controllers = [ReviewsController::class])
-class ReviewsControllerTest(@Autowired private val mockMvc: MockMvc) {
+@AutoConfigureMockMvc(addFilters = false)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class ReviewsControllerTest {
 
 
-    @MockBean
-    private lateinit var mockService: ReviewsService
+    @Autowired
+    private lateinit var webApplicationContext: WebApplicationContext
 
-    @Test
-    @WithMockUser
-    @DisplayName("test if http status code is 201 when create an review")
-    fun testePost() {
-
-        val body = Gson().toJson(request)
-
-        val mockRequest = MockMvcRequestBuilders.post(statementsUri)
-            .contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON)
-            .content(body)
-
-        val response = mockMvc.perform(mockRequest)
-
-        response.andExpect(status().isCreated)
-    }
+    private lateinit var mockMvc: MockMvc
 
     companion object {
-        private val request = ReviewCreateRequest(
-            username = "João Neto",
-            photo = "http://umaimagemqualquer.com.br",
-            comment = "Gostei muito do local, tem um ar leve e paisagem muito belas. Recomendo que visitem!"
-        )
-        private val updateRequest = ReviewUpdateRequest(
-            id = 1,
-            comment = "O local é bacana mas fiquei chateado por que o parque que eu fui estava fechado!"
-        )
-
-        private const val statementsUri = "http://localhost:8080/api/depoimentos"
+        private const val RECURSO = "/api/depoimentos"
     }
+
+    @BeforeEach
+    fun setup() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+            .apply<DefaultMockMvcBuilder>(
+                SecurityMockMvcConfigurers.springSecurity()
+            )
+            .build()
+
+    }
+
+    @BeforeEach
+    fun clearDatabase(@Autowired flyway: Flyway) {
+        flyway.clean()
+        flyway.migrate()
+    }
+
+    @Test
+    fun `deve retornar código 201 ao criar um depoimento`() {
+        mockMvc.post(RECURSO) {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = Json.encodeToString(ReviewTest.buildRequest())
+        }.andExpect {
+            status { isCreated() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+            content { json(ReviewTest.buildExpectedReviewResponse()) }
+        }
+
+    }
+
+    @Test
+    fun `deve retornar código 200 ao pesquisar por depoimento`() {
+        // adiciona o conteúdo
+        mockMvc.post(RECURSO) {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = Json.encodeToString(ReviewTest.buildRequest())
+        }
+
+        mockMvc.get("$RECURSO/1") {}
+            .andExpect {
+                status { isOk() }
+                content { contentType(MediaType.APPLICATION_JSON) }
+                content { json(ReviewTest.buildExpectedReviewResponse()) }
+            }
+    }
+
+    @Test
+    fun `deve retornar código 200 após atualizar o depoimento`() {
+        // adiciona o depoimento na base
+        mockMvc.post(RECURSO) {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = Json.encodeToString(ReviewTest.buildRequest())
+        }
+
+        // atualiza o depoimento
+        mockMvc.put(RECURSO) {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = Json.encodeToString(ReviewTest.buildUpdateRequest())
+        }.andExpect {
+            status { isOk() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+            content { json(ReviewTest.buildExpectedReviewResponseAfterUpdate()) }
+        }
+
+    }
+
+    @Test
+    fun `deve retornar status code 401 quando deleter o depoimento da base`() {
+        // adiciona o depoimento na base
+        mockMvc.post(RECURSO) {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = Json.encodeToString(ReviewTest.buildRequest())
+        }
+        // deleta o depoimento de id 1
+        mockMvc.delete("$RECURSO/1"){ }
+            .andExpect { status { isNoContent() } }
+    }
+
 
 }
