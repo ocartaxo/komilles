@@ -51,7 +51,9 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+
 	testImplementation("io.mockk:mockk:1.13.5")
+	testImplementation("org.assertj:assertj-core:3.24.2")
 }
 
 extra["springCloudVersion"] = "2022.0.4"
