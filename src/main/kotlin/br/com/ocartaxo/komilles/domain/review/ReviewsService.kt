@@ -30,7 +30,7 @@ class ReviewsService(private val repository: ReviewsRepository) {
 }
 
 private fun Review.update(request: ReviewUpdateRequest) {
-    this.review = request.comment ?: this.review
+    this.review = request.review ?: this.review
     this.photo = request.photo ?: this.photo
 }
 private fun ReviewRequest.toEntity()  = Review(
