@@ -3,7 +3,7 @@ package br.com.ocartaxo.komilles.domain.review
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "analises")
+@Table(name = "depoimentos")
 data class Review(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,
