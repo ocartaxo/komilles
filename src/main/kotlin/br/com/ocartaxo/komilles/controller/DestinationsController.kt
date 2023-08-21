@@ -1,12 +1,14 @@
 package br.com.ocartaxo.komilles.controller
 
 import br.com.ocartaxo.komilles.domain.destination.*
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 
+@Tag(name = "Destinos", description = "CRUD para destinos")
 @RestController
 @RequestMapping("/api/destinos")
 class DestinationsController(private val service: DestinationService) {

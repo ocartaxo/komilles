@@ -4,6 +4,7 @@ import br.com.ocartaxo.komilles.domain.review.ReviewCreateRequest
 import br.com.ocartaxo.komilles.domain.review.ReviewResponse
 import br.com.ocartaxo.komilles.domain.review.ReviewUpdateRequest
 import br.com.ocartaxo.komilles.domain.review.ReviewsService
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 
+@Tag(name = "Depoimentos", description = "CRUD para depoimentos")
 @RestController
 @RequestMapping("/api/depoimentos")
 class ReviewsController(
