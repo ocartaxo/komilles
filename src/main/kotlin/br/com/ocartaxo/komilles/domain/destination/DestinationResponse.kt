@@ -1,13 +1,20 @@
 package br.com.ocartaxo.komilles.domain.destination
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class DestinationResponse(
     val id: Int,
-    @JsonProperty("nome")
+    @SerialName("nome")
     val name: String,
-    @JsonProperty("foto")
-    val photo: String,
-    @JsonProperty("preço")
-    val price: Double
+    @SerialName("foto_caapa")
+    val thumbPhoto: String,
+    @SerialName("preço")
+    val price: Double,
+    @SerialName("descricao")
+    val description: String,
+    @SerialName("foto")
+    val photo: String? = null,
+    val meta: String? = null
 )
