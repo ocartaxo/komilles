@@ -30,6 +30,7 @@ repositories {
 }
 
 dependencies {
+	implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
