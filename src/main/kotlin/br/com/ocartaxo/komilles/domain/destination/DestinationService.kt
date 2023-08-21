@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 class DestinationService(
     private val repository: DestinationRepository,
     private val mapper: DestinationMapper,
-    private val chatGPT: ChatGPT
+    private val chatGPTService: ChatGPTService
 ) {
 
 
@@ -16,7 +16,7 @@ class DestinationService(
 
         if (body.description.isNullOrBlank()){
             // popular o campo com um texto criado por IA
-            body.description = chatGPT.generateDescription(body.name)
+            body.description = chatGPTService.generateDescription(body.name)
         }
 
         val entity = mapper.toEntity(body)
