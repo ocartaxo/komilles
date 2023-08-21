@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component
 import kotlin.time.Duration.Companion.seconds
 
 @Component
-class ChatGPT {
+class ChatGPTService {
 
-    private val logger = LoggerFactory.getLogger(ChatGPT::class.java)
+    private val logger = LoggerFactory.getLogger(ChatGPTService::class.java)
 
     @Value("\${openai.api_key}")
     private lateinit var TOKEN: String
