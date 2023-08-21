@@ -1,7 +1,7 @@
 package br.com.ocartaxo.komilles.domain.review
 
 object ReviewTest {
-    fun buildRequest() = ReviewRequest(
+    fun buildRequest() = ReviewCreateRequest(
         username = "Joao da Silva",
         review = "Esse lugar é muito bonito!! Recomendo que visitem!",
         photo = "http://randomphoto.com"
