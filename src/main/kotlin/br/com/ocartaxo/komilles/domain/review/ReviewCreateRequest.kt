@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ReviewRequest(
+data class ReviewCreateRequest(
     @NotBlank
     @SerialName("usuario")
     val username: String,

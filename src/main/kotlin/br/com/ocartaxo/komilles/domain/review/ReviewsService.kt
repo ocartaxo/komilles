@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 @Service
 class ReviewsService(private val repository: ReviewsRepository) {
 
-    fun create(request: ReviewRequest): ReviewResponse {
+    fun create(request: ReviewCreateRequest): ReviewResponse {
         val s = request.toEntity()
         return repository.save(s).toDTO()
     }
@@ -33,7 +33,7 @@ private fun Review.update(request: ReviewUpdateRequest) {
     this.review = request.review ?: this.review
     this.photo = request.photo ?: this.photo
 }
-private fun ReviewRequest.toEntity()  = Review(
+private fun ReviewCreateRequest.toEntity()  = Review(
     username = this.username,
     photo = this.photo,
     review = this.review
